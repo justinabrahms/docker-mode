@@ -12,16 +12,21 @@
 ;; This software is released under the MIT license.
 
 ;;; Code
-(setq docker-keywords (mapconcat 
-     'identity
-     (split-string "FROM MAINTAINER RUN CMD EXPOSE ENV ADD ENTRYPOINT VOLUME USER WORKDIR") 
-     "\\|"))
+(defvar docker-keywords
+  (mapconcat 'identity
+             (split-string "FROM MAINTAINER RUN CMD EXPOSE ENV ADD ENTRYPOINT VOLUME USER WORKDIR")
+             "\\|"))
 
 (defun docker-font-lock-keywords () 
   `((,docker-keywords . font-lock-keyword-face)))
 
+;;;###autoload
 (define-derived-mode docker-mode sh-mode "docker"
   "Major mode for editing Dockerfiles"
-    (setq font-lock-defaults '((docker-font-lock-keywords))))
+  (setq font-lock-defaults '((docker-font-lock-keywords))))
 
+;;;###autoload
+(add-to-list 'auto-mode-alist '("Dockerfile\\'" . docker-mode))
+
+(provide 'docker-mode)
 ;;; docker-mode.el ends here
