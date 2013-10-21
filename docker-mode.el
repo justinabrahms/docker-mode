@@ -12,13 +12,16 @@
 ;; This software is released under the MIT license.
 
 ;;; Code
-(defvar docker-keywords
-  (mapconcat 'identity
-             (split-string "FROM MAINTAINER RUN CMD EXPOSE ENV ADD ENTRYPOINT VOLUME USER WORKDIR")
-             "\\|"))
+(require 'regexp-opt)
 
-(defun docker-font-lock-keywords () 
-  `((,docker-keywords . font-lock-keyword-face)))
+(defvar docker-keywords '("FROM" "MAINTAINER" "RUN" "CMD" "EXPOSE" "ENV" "ADD"
+                          "ENTRYPOINT" "VOLUME" "USER" "WORKDIR"))
+
+(defvar docker-keywords-regexp
+  (concat "^\\s-*" (regexp-opt docker-keywords 'words)))
+
+(defun docker-font-lock-keywords ()
+  `((,docker-keywords-regexp . font-lock-keyword-face)))
 
 ;;;###autoload
 (define-derived-mode docker-mode sh-mode "docker"
