@@ -1,16 +1,19 @@
 ;;; docker-mode.el --- Support for Dockerfile editing
-
 ;; Copyright (C) 2013 Justin Abrahms
-
+;;
 ;; Author: Justin Abrahms <justin@abrah.ms>
 ;; Created: 20 October 2013
 ;; Keywords: docker dockerfile
 ;; Version: 0.0.1
-
+;;
 ;; This file is not part of GNU Emacs.
-
+;;
 ;; This software is released under the MIT license.
-
+;;
+;;; Commentary
+;;
+;; Thanks to  syohex@gmail.com (Syohei YOSHIDA)  for code cleanup.
+;;
 ;;; Code
 (require 'regexp-opt)
 
